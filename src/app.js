@@ -7,12 +7,12 @@ registerScreens();
 
 const tabs = [{
   label: 'Navigation',
-  screen: 'example.Types',
+  screen: 'react_native_skeleton.Types',
   icon: require('../img/list.png'),
   title: 'Navigation Types',
 }, {
   label: 'Actions',
-  screen: 'example.Actions',
+  screen: 'react_native_skeleton.Actions',
   icon: require('../img/swap.png'),
   title: 'Navigation Actions',
 }];
@@ -20,7 +20,7 @@ const tabs = [{
 if (Platform.OS === 'android') {
   tabs.push({
     label: 'Transitions',
-    screen: 'example.Transitions',
+    screen: 'react_native_skeleton.Transitions',
     icon: require('../img/transform.png'),
     title: 'Navigation Transitions',
   });
@@ -54,7 +54,7 @@ Navigation.startTabBasedApp({
   },
   drawer: {
     left: {
-      screen: 'example.Types.Drawer'
+      screen: 'react_native_skeleton.Types.Drawer'
     }
   }
 });

@@ -23,24 +23,24 @@ import Masonry from './transitions/sharedElementTransitions/Masonry/Masonry';
 import MasonryItem from './transitions/sharedElementTransitions/Masonry/Item';
 
 export default function () {
-  Navigation.registerComponent('example.Types', () => Types);
-  Navigation.registerComponent('example.Actions', () => Actions);
-  Navigation.registerComponent('example.Transitions', () => Transitions);
+  Navigation.registerComponent('react_native_skeleton.Types', () => Types);
+  Navigation.registerComponent('react_native_skeleton.Actions', () => Actions);
+  Navigation.registerComponent('react_native_skeleton.Transitions', () => Transitions);
 
-  Navigation.registerComponent('example.Types.Push', () => Push);
-  Navigation.registerComponent('example.Types.Drawer', () => Drawer);
-  Navigation.registerComponent('example.Types.Screen', () => Drawer);
-  Navigation.registerComponent('example.Types.Modal', () => Modal);
-  Navigation.registerComponent('example.Types.LightBox', () => LightBox);
-  Navigation.registerComponent('example.Types.Notification', () => Notification);
-  Navigation.registerComponent('example.Types.TopTabs', () => TopTabs);
-  Navigation.registerComponent('example.Types.TopTabs.TabOne', () => TabOne);
-  Navigation.registerComponent('example.Types.TopTabs.TabTwo', () => TabTwo);
+  Navigation.registerComponent('react_native_skeleton.Types.Push', () => Push);
+  Navigation.registerComponent('react_native_skeleton.Types.Drawer', () => Drawer);
+  Navigation.registerComponent('react_native_skeleton.Types.Screen', () => Drawer);
+  Navigation.registerComponent('react_native_skeleton.Types.Modal', () => Modal);
+  Navigation.registerComponent('react_native_skeleton.Types.LightBox', () => LightBox);
+  Navigation.registerComponent('react_native_skeleton.Types.Notification', () => Notification);
+  Navigation.registerComponent('react_native_skeleton.Types.TopTabs', () => TopTabs);
+  Navigation.registerComponent('react_native_skeleton.Types.TopTabs.TabOne', () => TabOne);
+  Navigation.registerComponent('react_native_skeleton.Types.TopTabs.TabTwo', () => TabTwo);
 
-  Navigation.registerComponent('example.Transitions.CollapsingHeader', () => CollapsingHeader);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions', () => SharedElementTransitions);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Cards', () => Cards);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Cards.Info', () => CardsInfo);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Masonry', () => Masonry);
-  Navigation.registerComponent('example.Transitions.SharedElementTransitions.Masonry.Item', () => MasonryItem);
+  Navigation.registerComponent('react_native_skeleton.Transitions.CollapsingHeader', () => CollapsingHeader);
+  Navigation.registerComponent('react_native_skeleton.Transitions.SharedElementTransitions', () => SharedElementTransitions);
+  Navigation.registerComponent('react_native_skeleton.Transitions.SharedElementTransitions.Cards', () => Cards);
+  Navigation.registerComponent('react_native_skeleton.Transitions.SharedElementTransitions.Cards.Info', () => CardsInfo);
+  Navigation.registerComponent('react_native_skeleton.Transitions.SharedElementTransitions.Masonry', () => Masonry);
+  Navigation.registerComponent('react_native_skeleton.Transitions.SharedElementTransitions.Masonry.Item', () => MasonryItem);
 }
