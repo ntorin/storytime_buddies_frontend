@@ -1,6 +1,11 @@
 import {Platform} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import registerScreens from './screens';
+import { iconsMap, iconsLoaded } from './helpers/icons-loader';
+
+
+iconsLoaded.then(() => {
+
 
 // screen related book keeping
 registerScreens();
@@ -8,7 +13,7 @@ registerScreens();
 const tabs = [{
   label: 'Navigation',
   screen: 'react_native_skeleton.Types',
-  icon: require('../img/list.png'),
+  icon: iconsMap['ios-person'],
   title: 'Navigation Types',
 }, {
   label: 'Actions',
@@ -26,6 +31,9 @@ if (Platform.OS === 'android') {
   });
 }
 
+  startApp();
+
+function startApp(){ 
 // this will start our app
 Navigation.startTabBasedApp({
   tabs,
@@ -57,4 +65,7 @@ Navigation.startTabBasedApp({
       screen: 'react_native_skeleton.Types.Drawer'
     }
   }
+});
+}
+
 });

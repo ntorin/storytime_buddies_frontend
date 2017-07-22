@@ -11,7 +11,7 @@ import {
 export default class CustomNavBarScreen extends Component {
   static navigatorStyle = {
     drawUnderTabBar: true,
-    navBarCustomView: 'example.CustomNavBar',
+    navBarCustomView: 'react_native_skeleton.CustomNavBar',
     navBarCustomViewInitialProps: {name: 'Hi Custom'}
   };
 
