@@ -23,24 +23,24 @@ import Masonry from './transitions/sharedElementTransitions/Masonry/Masonry';
 import MasonryItem from './transitions/sharedElementTransitions/Masonry/Item';
 
 export default function () {
-  Navigation.registerComponent('react_native_skeleton.Types', () => Types);
-  Navigation.registerComponent('react_native_skeleton.Actions', () => Actions);
-  Navigation.registerComponent('react_native_skeleton.Transitions', () => Transitions);
+  Navigation.registerComponent('storytime_buddies_frontend.Types', () => Types);
+  Navigation.registerComponent('storytime_buddies_frontend.Actions', () => Actions);
+  Navigation.registerComponent('storytime_buddies_frontend.Transitions', () => Transitions);
 
-  Navigation.registerComponent('react_native_skeleton.Types.Push', () => Push);
-  Navigation.registerComponent('react_native_skeleton.Types.Drawer', () => Drawer);
-  Navigation.registerComponent('react_native_skeleton.Types.Screen', () => Drawer);
-  Navigation.registerComponent('react_native_skeleton.Types.Modal', () => Modal);
-  Navigation.registerComponent('react_native_skeleton.Types.LightBox', () => LightBox);
-  Navigation.registerComponent('react_native_skeleton.Types.Notification', () => Notification);
-  Navigation.registerComponent('react_native_skeleton.Types.TopTabs', () => TopTabs);
-  Navigation.registerComponent('react_native_skeleton.Types.TopTabs.TabOne', () => TabOne);
-  Navigation.registerComponent('react_native_skeleton.Types.TopTabs.TabTwo', () => TabTwo);
+  Navigation.registerComponent('storytime_buddies_frontend.Types.Push', () => Push);
+  Navigation.registerComponent('storytime_buddies_frontend.Types.Drawer', () => Drawer);
+  Navigation.registerComponent('storytime_buddies_frontend.Types.Screen', () => Drawer);
+  Navigation.registerComponent('storytime_buddies_frontend.Types.Modal', () => Modal);
+  Navigation.registerComponent('storytime_buddies_frontend.Types.LightBox', () => LightBox);
+  Navigation.registerComponent('storytime_buddies_frontend.Types.Notification', () => Notification);
+  Navigation.registerComponent('storytime_buddies_frontend.Types.TopTabs', () => TopTabs);
+  Navigation.registerComponent('storytime_buddies_frontend.Types.TopTabs.TabOne', () => TabOne);
+  Navigation.registerComponent('storytime_buddies_frontend.Types.TopTabs.TabTwo', () => TabTwo);
 
-  Navigation.registerComponent('react_native_skeleton.Transitions.CollapsingHeader', () => CollapsingHeader);
-  Navigation.registerComponent('react_native_skeleton.Transitions.SharedElementTransitions', () => SharedElementTransitions);
-  Navigation.registerComponent('react_native_skeleton.Transitions.SharedElementTransitions.Cards', () => Cards);
-  Navigation.registerComponent('react_native_skeleton.Transitions.SharedElementTransitions.Cards.Info', () => CardsInfo);
-  Navigation.registerComponent('react_native_skeleton.Transitions.SharedElementTransitions.Masonry', () => Masonry);
-  Navigation.registerComponent('react_native_skeleton.Transitions.SharedElementTransitions.Masonry.Item', () => MasonryItem);
+  Navigation.registerComponent('storytime_buddies_frontend.Transitions.CollapsingHeader', () => CollapsingHeader);
+  Navigation.registerComponent('storytime_buddies_frontend.Transitions.SharedElementTransitions', () => SharedElementTransitions);
+  Navigation.registerComponent('storytime_buddies_frontend.Transitions.SharedElementTransitions.Cards', () => Cards);
+  Navigation.registerComponent('storytime_buddies_frontend.Transitions.SharedElementTransitions.Cards.Info', () => CardsInfo);
+  Navigation.registerComponent('storytime_buddies_frontend.Transitions.SharedElementTransitions.Masonry', () => Masonry);
+  Navigation.registerComponent('storytime_buddies_frontend.Transitions.SharedElementTransitions.Masonry.Item', () => MasonryItem);
 }

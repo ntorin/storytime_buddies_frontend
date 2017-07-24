@@ -13,20 +13,20 @@ class Types extends React.Component {
 
   pushScreen = () => {
     this.props.navigator.push({
-      screen: 'react_native_skeleton.Types.Push',
+      screen: 'storytime_buddies_frontend.Types.Push',
       title: 'New Screen',
     });
   };
 
   pushTopTabsScreen = () => {
     this.props.navigator.push({
-      screen: 'react_native_skeleton.Types.TopTabs',
+      screen: 'storytime_buddies_frontend.Types.TopTabs',
       title: 'Top Tabs',
       topTabs: [{
-        screenId: 'react_native_skeleton.Types.TopTabs.TabOne',
+        screenId: 'storytime_buddies_frontend.Types.TopTabs.TabOne',
         title: 'Tab One',
       }, {
-        screenId: 'react_native_skeleton.Types.TopTabs.TabTwo',
+        screenId: 'storytime_buddies_frontend.Types.TopTabs.TabTwo',
         title: 'Tab Two',
       }],
     });
@@ -34,14 +34,14 @@ class Types extends React.Component {
 
   showModal = () => {
     this.props.navigator.showModal({
-      screen: 'react_native_skeleton.Types.Modal',
+      screen: 'storytime_buddies_frontend.Types.Modal',
       title: 'Modal',
     });
   };
 
   showLightBox = () => {
     this.props.navigator.showLightBox({
-      screen: "react_native_skeleton.Types.LightBox",
+      screen: "storytime_buddies_frontend.Types.LightBox",
       passProps: {
         title: 'LightBox',
         content: 'Hey there, I\'m a light box screen :D',
@@ -61,7 +61,7 @@ class Types extends React.Component {
 
   showInAppNotification = () => {
     this.props.navigator.showInAppNotification({
-      screen: 'react_native_skeleton.Types.Notification',
+      screen: 'storytime_buddies_frontend.Types.Notification',
     });
   };
 

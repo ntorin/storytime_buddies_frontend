@@ -10,12 +10,12 @@ iconsLoaded.then(() => {
 
   const tabs = [{
     label: 'Navigation',
-    screen: 'react_native_skeleton.Types',
+    screen: 'storytime_buddies_frontend.Types',
     icon: iconsMap['ios-person'],
     title: 'Navigation Types',
   }, {
     label: 'Actions',
-    screen: 'react_native_skeleton.Actions',
+    screen: 'storytime_buddies_frontend.Actions',
     icon: require('../img/swap.png'),
     title: 'Navigation Actions',
   }];
@@ -23,7 +23,7 @@ iconsLoaded.then(() => {
   if (Platform.OS === 'android') {
     tabs.push({
       label: 'Transitions',
-      screen: 'react_native_skeleton.Transitions',
+      screen: 'storytime_buddies_frontend.Transitions',
       icon: require('../img/transform.png'),
       title: 'Navigation Transitions',
     });
@@ -60,7 +60,7 @@ iconsLoaded.then(() => {
       },
       drawer: {
         left: {
-          screen: 'react_native_skeleton.Types.Drawer'
+          screen: 'storytime_buddies_frontend.Types.Drawer'
         }
       }
     });

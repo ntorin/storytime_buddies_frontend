@@ -1,4 +1,4 @@
-package com.react_native_skeleton;
+package com.storytime_buddies_frontend;
 
 import android.app.Application;
 
