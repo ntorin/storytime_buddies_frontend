@@ -22,7 +22,12 @@ import CardsInfo from './transitions/sharedElementTransitions/Cards/Info';
 import Masonry from './transitions/sharedElementTransitions/Masonry/Masonry';
 import MasonryItem from './transitions/sharedElementTransitions/Masonry/Item';
 
+import Login from './pages/login/Login';
+
 export default function () {
+  Navigation.registerComponent('storytime_buddies_frontend.Login', () => Login);
+  Navigation.registerComponent('storytime_buddies_frontend.Home', () => Home);
+
   Navigation.registerComponent('storytime_buddies_frontend.Types', () => Types);
   Navigation.registerComponent('storytime_buddies_frontend.Actions', () => Actions);
   Navigation.registerComponent('storytime_buddies_frontend.Transitions', () => Transitions);
@@ -43,4 +48,5 @@ export default function () {
   Navigation.registerComponent('storytime_buddies_frontend.Transitions.SharedElementTransitions.Cards.Info', () => CardsInfo);
   Navigation.registerComponent('storytime_buddies_frontend.Transitions.SharedElementTransitions.Masonry', () => Masonry);
   Navigation.registerComponent('storytime_buddies_frontend.Transitions.SharedElementTransitions.Masonry.Item', () => MasonryItem);
+  
 }
