@@ -23,10 +23,15 @@ import Masonry from './transitions/sharedElementTransitions/Masonry/Masonry';
 import MasonryItem from './transitions/sharedElementTransitions/Masonry/Item';
 
 import Login from './pages/login/Login';
+import LobbyList from './pages/home/tabs/lobbyList/LobbyList';
+import Library from './pages/home/tabs/library/Library';
+import MyProfile from './pages/home/tabs/myProfile/MyProfile';
 
 export default function () {
   Navigation.registerComponent('storytime_buddies_frontend.Login', () => Login);
-  Navigation.registerComponent('storytime_buddies_frontend.Home', () => Home);
+  Navigation.registerComponent('storytime_buddies_frontend.LobbyList', () => LobbyList);
+  Navigation.registerComponent('storytime_buddies_frontend.Library', () => Library);
+  Navigation.registerComponent('storytime_buddies_frontend.MyProfile', () => MyProfile);
 
   Navigation.registerComponent('storytime_buddies_frontend.Types', () => Types);
   Navigation.registerComponent('storytime_buddies_frontend.Actions', () => Actions);

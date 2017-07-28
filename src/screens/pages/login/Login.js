@@ -9,25 +9,24 @@ var tabs;
 
 iconsLoaded.then(() => {
     tabs = [{
-        label: 'Navigation',
-        screen: 'storytime_buddies_frontend.Types',
-        icon: iconsMap['ios-person'],
-        title: 'Navigation Types',
-    }, {
-        label: 'Actions',
-        screen: 'storytime_buddies_frontend.Actions',
-        icon: iconsMap['ios-people'],
-        title: 'Navigation Actions',
+        label: 'Lobbies',
+        screen: 'storytime_buddies_frontend.LobbyList',
+        icon: iconsMap['pencil'],
+        title: 'Available Lobbies',
+    },
+    {
+        label: 'Library',
+        screen: 'storytime_buddies_frontend.Library',
+        icon: iconsMap['book-bookmark'],
+        title: 'Story Library',
+    },
+    {
+        label: 'Profile',
+        screen: 'storytime_buddies_frontend.MyProfile',
+        icon: iconsMap['person'],
+        title: 'Your Profile',
     }];
 
-    if (Platform.OS === 'android') {
-        tabs.push({
-            label: 'Transitions',
-            screen: 'storytime_buddies_frontend.Transitions',
-            icon: iconsMap['ios-chatbubbles'],
-            title: 'Navigation Transitions',
-        });
-    }
 
 });
 
@@ -40,10 +39,10 @@ class Login extends React.Component {
                 <Image source={require('../../../assets/img/loginbg.jpg')} style={styles.backgroundImage} >
                     <TextInput placeholder={'username'} autoCorrect={false} autoCapitalize={'none'} style={[styles.credential, { bottom: Dimensions.get('window').height * 0.5 }]} />
                     <TextInput placeholder={'password'} autoCorrect={false} autoCapitalize={'none'} style={[styles.credential, { bottom: Dimensions.get('window').height * 0.4 }]} />
-                    <Button onPress={this.goToHome} style={[styles.button, { bottom: Dimensions.get('window').height * 0.3 }]}>
+                    <Button onPress={this.goToHome} textStyle={styles.buttonText} style={[styles.button, { bottom: Dimensions.get('window').height * 0.3 }]}>
                         Login
                     </Button>
-                    <Button onPress={this.registerUser} style={[styles.button, { bottom: Dimensions.get('window').height * 0.2 }]}>
+                    <Button onPress={this.registerUser} textStyle={styles.buttonText} style={[styles.button, { bottom: Dimensions.get('window').height * 0.2 }]}>
                         Register
                     </Button>
                 </Image>
@@ -64,25 +63,25 @@ class Login extends React.Component {
             tabs,
             animationType: Platform.OS === 'ios' ? 'slide-down' : 'fade',
             tabsStyle: {
-                tabBarBackgroundColor: '#003a66',
+                tabBarBackgroundColor: '#3bc9a7',
                 navBarButtonColor: '#ffffff',
                 tabBarButtonColor: '#ffffff',
                 navBarTextColor: '#ffffff',
                 tabBarSelectedButtonColor: '#ff505c',
-                navigationBarColor: '#003a66',
-                navBarBackgroundColor: '#003a66',
-                statusBarColor: '#002b4c',
+                navigationBarColor: '#3bc9a7',
+                navBarBackgroundColor: '#3bc9a7',
+                statusBarColor: '#34b092',
                 tabFontFamily: 'BioRhyme-Bold',
             },
             appStyle: {
-                tabBarBackgroundColor: '#003a66',
+                tabBarBackgroundColor: '#3bc9a7',
                 navBarButtonColor: '#ffffff',
                 tabBarButtonColor: '#ffffff',
                 navBarTextColor: '#ffffff',
-                tabBarSelectedButtonColor: '#ff505c',
-                navigationBarColor: '#003a66',
-                navBarBackgroundColor: '#003a66',
-                statusBarColor: '#002b4c',
+                tabBarSelectedButtonColor: '#fbf5a9',
+                navigationBarColor: '#000000',
+                navBarBackgroundColor: '#3bc9a7',
+                statusBarColor: '#34b092',
                 tabFontFamily: 'BioRhyme-Bold',
             },
             drawer: {
@@ -117,7 +116,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: Dimensions.get('window').width * 0.7,
         left: Dimensions.get('window').width * 0.15,
-        right: Dimensions.get('window').width * 0.15
+        right: Dimensions.get('window').width * 0.15,
+        backgroundColor: '#41ddb8',
+        borderWidth: 0
+    },
+
+    buttonText: {
+        color: '#ffffff'
     }
 });
 

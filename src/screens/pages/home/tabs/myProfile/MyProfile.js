@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions, Image, TextInput } from 'react-native';
 
-class Home extends React.Component {
+class MyProfile extends React.Component {
 
     constructor(props){
         super(props);
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Home;
+export default MyProfile;
