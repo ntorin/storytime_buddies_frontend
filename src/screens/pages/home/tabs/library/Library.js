@@ -1,12 +1,28 @@
 import React from 'react';
-import { StyleSheet, View, Text, Dimensions, Image, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, Image, TextInput, ListView, RefreshControl } from 'react-native';
 import Button from 'apsl-react-native-button';
-import Masonry from '../../../../transitions/sharedElementTransitions/Masonry/Masonry';
+import LibraryItem from './LibraryItem';
 
 class Library extends React.Component {
 
     constructor(props){
         super(props);
+        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        this.state = {
+            refreshing: false,
+            stories: ds.cloneWithRows(['row 1', 'row 2',]),
+        };
+    }
+
+     _onRefresh() {
+        this.setState({ refreshing: true });
+        this.fetchStories().then(() => {
+            this.setState({ refreshing: false });
+        });
+    }
+
+    fetchStories() {
+        //get list of stories
     }
 
     render(){
@@ -23,7 +39,16 @@ class Library extends React.Component {
                 </Button>
 
                 <View style={styles.libraryResults}>
-                    <Masonry/>
+                    <ListView
+                        dataSource={this.state.stories}
+                        renderRow={(rowData) => <LibraryItem storyName={rowData} />}
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={this._onRefresh.bind(this)}
+                            />
+                        }>
+                    </ListView>
                 </View>
             </View>
         )
@@ -57,7 +82,11 @@ const styles = StyleSheet.create({
     },
 
     libraryResults: {
-
+        position: 'absolute',
+        height: Dimensions.get('window').height * 0.8,
+        top: Dimensions.get('window').height * 0.2,
+        left: Dimensions.get('window').width * 0.025,
+        right: Dimensions.get('window').width * 0.025,
     }
 });
 

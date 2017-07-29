@@ -21,6 +21,12 @@ iconsLoaded.then(() => {
         title: 'Story Library',
     },
     {
+        label: 'Messages',
+        screen: 'storytime_buddies_frontend.Messages',
+        icon: iconsMap['chat'],
+        title: 'Recent Messages',
+    },
+    {
         label: 'Profile',
         screen: 'storytime_buddies_frontend.MyProfile',
         icon: iconsMap['person'],

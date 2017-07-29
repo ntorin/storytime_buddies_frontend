@@ -14,7 +14,8 @@ const replaceSuffixPattern = /--(active|big|small|very-big)/g;
 const icons = {
   "pencil": [30, "#fff", Entypo],
   "book-bookmark": [30, "#fff", Foundation],
-  "person": [30, "#fff", Octicons]
+  "person": [30, "#fff", Octicons],
+  "chat": [30, "#fff", Entypo]
 }
 
 const defaultIconProvider = Entypo;
