@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions, Image, TextInput, ListView, RefreshControl } from 'react-native';
 import Button from 'apsl-react-native-button';
-import LibraryItem from './LibraryItem';
 
 var storyList = [
     {
-        storyName: 'STORYNAME'
+        storyName: 'STORYNAME',
+        storyPreview: 'STORYPREVIEW',
+        storyCompleted: true,
+        storyLikes: 0
     },
 ]
 
@@ -37,11 +39,11 @@ class Library extends React.Component {
             <View style={styles.container}>
                 <TextInput placeholder={'🔎 Search...'} autoCorrect={false} autoCapitalize={'none'}
                     keyboardType={'web-search'} onSubmitEditing={this.filterQuery} style={styles.searchBar} />
-                <Button onPress={this.createLobby} textStyle={styles.buttonText} style={[styles.button, { left: Dimensions.get('window').width * 0.05 }]}>
+                <Button onPress={this.sortByPopularity()} textStyle={styles.buttonText} style={[styles.button, { left: Dimensions.get('window').width * 0.05 }]}>
                     Popular
                 </Button>
 
-                <Button onPress={this.joinLobby} textStyle={styles.buttonText} style={[styles.button, { right: Dimensions.get('window').width * 0.05 }]}>
+                <Button onPress={this.sortByRecent()} textStyle={styles.buttonText} style={[styles.button, { right: Dimensions.get('window').width * 0.05 }]}>
                     Recent
                 </Button>
 
@@ -63,17 +65,28 @@ class Library extends React.Component {
 
     renderRow(rowData) {
         return (
-            <Button onPress={() => this.goToStory()} style={styles.listItem}>
+            <Button onPress={() => this.goToStory(rowData)} style={styles.listItem}>
                 <Text>{rowData.storyName}</Text>
+                <Text>{rowData.storyPreview}</Text>
+                <Text>{rowData.storyCompleted}</Text>
+                <Text>{rowData.storyLikes}</Text>
             </Button>
         )
     }
 
-    goToStory(){
+    sortByPopularity(){
+
+    }
+
+    sortByRecent(){
+        
+    }
+
+    goToStory(rowData){
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.Story',
             title: 'STORYNAME',
-            passProps: {}
+            passProps: {story: rowData}
         });
     }
 }

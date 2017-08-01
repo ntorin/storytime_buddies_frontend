@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, } from 'react-native';
-import Chatlog from '../../../components/Chatlog';
 
-class Lobby extends React.Component {
+class Chatlog extends React.Component {
 
     constructor(props){
         super(props);
@@ -11,7 +10,6 @@ class Lobby extends React.Component {
     render(){
         return(
             <View style={styles.container}>
-                <Chatlog/>
             </View>
         )
     }
@@ -29,4 +27,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Lobby;
+export default Chatlog;

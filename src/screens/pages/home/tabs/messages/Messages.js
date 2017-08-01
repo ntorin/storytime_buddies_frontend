@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions, Image, TextInput, ListView, RefreshControl } from 'react-native';
-import FriendItem from './FriendItem';
 import Button from 'apsl-react-native-button';
 
 var friendList = [
@@ -39,6 +38,8 @@ class Messages extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <TextInput placeholder={'🔎 Search...'} autoCorrect={false} autoCapitalize={'none'}
+                    keyboardType={'web-search'} onSubmitEditing={() => this.filterQuery()} style={styles.searchBar} />
                 <ListView
                     dataSource={this.state.friends}
                     refreshControl={
@@ -54,7 +55,7 @@ class Messages extends React.Component {
 
     renderRow(rowData){
         return(
-                <Button onPress={() => this.goToChat()} style={styles.listItem}>
+                <Button onPress={() => this.goToChat(rowData)} style={styles.listItem}>
                     <Text>{rowData.friendName}</Text>
                     <Text>{rowData.friendLastMessage}</Text>
                     <Text>{rowData.friendMessageDate}</Text>
@@ -63,12 +64,16 @@ class Messages extends React.Component {
         )
     }
 
-    goToChat(){ 
+    goToChat(rowData){ 
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.Chat',
             title: 'Chat with RECIPIENT_USERNAME',
-            passProps: {}
+            passProps: {friend: rowData}
         });
+    }
+
+    filterQuery(){
+
     }
 }
 
@@ -80,6 +85,10 @@ const styles = StyleSheet.create({
     backgroundImage: {
         flex: 1,
         resizeMode: 'cover'
+    },
+
+    searchBar: {
+        textAlign: 'center'
     },
 
     listItem: {

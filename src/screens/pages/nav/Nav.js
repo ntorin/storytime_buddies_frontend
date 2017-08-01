@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, Text, ListView } from 'react-native';
-import NavItem from './NavItem';
 import Button from 'apsl-react-native-button';
 
 

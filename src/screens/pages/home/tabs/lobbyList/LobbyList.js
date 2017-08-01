@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions, Image, TextInput, ListView, RefreshControl } from 'react-native';
 import Button from 'apsl-react-native-button';
-import LobbyListItem from './LobbyListItem';
 
 var lobbyList = [
     {
         lobbyName: 'LOBBYNAME',
         lobbyMembers: 'LOBBYMEMBERS',
+        lobbyWordLimit: 5,
         lobbyHasPassword: false,
         lobbyId: 1,
         lobbyPreview: 'LOBBYPREVIEW1' 
@@ -83,7 +83,7 @@ class LobbyList extends React.Component {
 
     onLobbySelected(rowData){
         console.log(rowData.lobbyId);
-        this.setState({lobbySelected: rowData.lobbyId, lobbySelectedPreview: rowData.lobbyPreview})
+        this.setState({lobbySelected: rowData, lobbySelectedPreview: rowData.lobbyPreview})
     }
 
     filterQuery() {
@@ -103,7 +103,7 @@ class LobbyList extends React.Component {
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.Lobby',
             title: 'LOBBYNAME',
-            passProps: {}
+            passProps: {lobby: this.state.lobbySelected}
         });
     }
 
