@@ -1,19 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, Text, Dimensions, Image, TextInput } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
-class LibraryItem extends React.Component {
+class MyComments extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            storyName: this.props.storyName,
-        }
     }
 
     render(){
         return(
             <View style={styles.container}>
-                <Text>{this.state.storyName}</Text>
             </View>
         )
     }
@@ -22,6 +18,7 @@ class LibraryItem extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#ffffff'
     },
 
     backgroundImage: {
@@ -30,4 +27,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LibraryItem;
+export default MyComments;

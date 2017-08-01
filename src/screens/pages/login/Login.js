@@ -92,7 +92,7 @@ class Login extends React.Component {
             },
             drawer: {
                 left: {
-                    screen: 'storytime_buddies_frontend.Types.Drawer'
+                    screen: 'storytime_buddies_frontend.Nav'
                 }
             }
         });

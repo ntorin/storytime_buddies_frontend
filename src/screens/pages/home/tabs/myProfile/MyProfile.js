@@ -31,11 +31,11 @@ class MyProfile extends React.Component {
                     </View>
                 </View>
 
-                <Button textStyle={styles.buttonText} style={[styles.button, {bottom: Dimensions.get('window').height * 0.65}]}>
+                <Button onPress={() => this.viewStories()} textStyle={styles.buttonText} style={[styles.button, {bottom: Dimensions.get('window').height * 0.65}]}>
                     View Stories
                 </Button>
 
-                <Button textStyle={styles.buttonText} style={[styles.button, {bottom: Dimensions.get('window').height * 0.55}]}>
+                <Button onPress={() => this.viewComments()} textStyle={styles.buttonText} style={[styles.button, {bottom: Dimensions.get('window').height * 0.55}]}>
                     View Comments
                 </Button>
 
@@ -44,11 +44,32 @@ class MyProfile extends React.Component {
                     <Text>Friends</Text>
                 </View>
 
-                <Button textStyle={styles.buttonText} style={[styles.button, {bottom: Dimensions.get('window').height * 0.35}]}>
+                <Button onPress={() => this.viewFriends()} textStyle={styles.buttonText} style={[styles.button, {bottom: Dimensions.get('window').height * 0.35}]}>
                     View Friends
                 </Button>
             </View>
         )
+    }
+
+    viewStories(){
+        this.props.navigator.push({
+            screen: 'storytime_buddies_frontend.MyStories',
+            title: 'Your Stories'
+        });
+    }
+
+    viewComments(){
+        this.props.navigator.push({
+            screen: 'storytime_buddies_frontend.MyComments',
+            title: 'Your Comments'
+        });
+    }
+
+    viewFriends(){
+        this.props.navigator.push({
+            screen: 'storytime_buddies_frontend.MyFriends',
+            title: 'Friend List'
+        });
     }
 }
 

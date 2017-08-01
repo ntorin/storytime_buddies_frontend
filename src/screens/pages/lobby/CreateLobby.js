@@ -1,7 +1,8 @@
+//possible modal
 import React from 'react';
-import { StyleSheet, View, } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
-class Lobby extends React.Component {
+class CreateLobby extends React.Component {
 
     constructor(props){
         super(props);
@@ -27,4 +28,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Lobby;
+export default CreateLobby;

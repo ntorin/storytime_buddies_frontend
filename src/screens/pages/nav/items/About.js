@@ -1,19 +1,16 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions, Image, TextInput } from 'react-native';
 
-class LobbyListItem extends React.Component {
+class About extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            lobbyName: this.props.lobbyName,
-        }
     }
 
     render(){
         return(
             <View style={styles.container}>
-                <Text>{this.state.lobbyName}</Text>
+            
             </View>
         )
     }
@@ -22,6 +19,7 @@ class LobbyListItem extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#ffffff'
     },
 
     backgroundImage: {
@@ -30,4 +28,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LobbyListItem;
+export default About;
