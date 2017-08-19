@@ -4,20 +4,25 @@ import Button from 'apsl-react-native-button';
 
 var lobbyList = [
     {
-        lobbyName: 'LOBBYNAME',
-        lobbyMembers: 'LOBBYMEMBERS',
-        lobbyWordLimit: 5,
-        lobbyHasPassword: false,
-        lobbyId: 1,
-        lobbyPreview: 'LOBBYPREVIEW1' 
+        "id": 1,
+        "name": "Split Been",
+        "has_password": false,
+        "password": "",
+        "word_limit": null,
+        "master_user_id": 0,
+        "members": 0,
+        "created_at": "2017-08-08T09:15:24.377Z",
+        "updated_at": "2017-08-08T09:15:24.377Z",
+        "url": "http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/lobbies/1.json"
     }
 ]
+
+const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
 class LobbyList extends React.Component {
 
     constructor(props) {
         super(props);
-        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.state = {
             refreshing: false,
             lobbyList: lobbyList,
@@ -25,17 +30,23 @@ class LobbyList extends React.Component {
             lobbySelected: 0,
             lobbySelectedPreview: 'Select a lobby to view its story here.'
         };
+
+        this.fetchLobbies()
     }
 
     _onRefresh() {
         this.setState({ refreshing: true });
-        this.fetchLobbies().then(() => {
-            this.setState({ refreshing: false });
-        });
+        this.fetchLobbies();
     }
 
     fetchLobbies() {
         //get list of lobbies
+        fetch('http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/lobbies.json')
+            .then((response) => response.json())
+            .then((responseJSON) => {
+                console.log(responseJSON);
+                this.setState({lobbies: this.state.lobbies.cloneWithRows(responseJSON), refreshing: false });
+            });
     }
 
     render() {
@@ -70,20 +81,20 @@ class LobbyList extends React.Component {
         )
     }
 
-    renderRow(rowData){
-        return(
-                <Button onPress={() => this.onLobbySelected(rowData)} style={styles.listItem}>
-                    <Text>{rowData.lobbyName}</Text>
-                    <Text>{rowData.lobbyMembers}</Text>
-                    <Text>{rowData.lobbyHasPassword}</Text>
-                    <Text>{rowData.lobbyId}</Text>
-                </Button>
+    renderRow(rowData) {
+        return (
+            <Button onPress={() => this.onLobbySelected(rowData)} style={styles.listItem}>
+                <Text>{rowData.name}</Text>
+                <Text>{rowData.members}</Text>
+                <Text>{rowData.has_password}</Text>
+                <Text>{rowData.id}</Text>
+            </Button>
         )
     }
 
-    onLobbySelected(rowData){
-        console.log(rowData.lobbyId);
-        this.setState({lobbySelected: rowData, lobbySelectedPreview: rowData.lobbyPreview})
+    onLobbySelected(rowData) {
+        console.log(rowData.id);
+        this.setState({ lobbySelected: rowData, lobbySelectedPreview: rowData.lobbyPreview })
     }
 
     filterQuery() {
@@ -103,7 +114,7 @@ class LobbyList extends React.Component {
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.Lobby',
             title: 'LOBBYNAME',
-            passProps: {lobby: this.state.lobbySelected}
+            passProps: { lobby: this.state.lobbySelected }
         });
     }
 
