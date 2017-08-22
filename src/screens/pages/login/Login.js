@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Dimensions, Image, TextInput, Platform } from 'react-native';
+import { StyleSheet, View, Text, Dimensions, Image, TextInput, Platform, Alert } from 'react-native';
 import { iconsMap, iconsLoaded } from '../../../helpers/icons-loader';
 import { Navigation } from 'react-native-navigation';
 
@@ -39,16 +39,25 @@ iconsLoaded.then(() => {
 
 class Login extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            responseHeaders: '',
+        };
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <Image source={require('../../../assets/img/loginbg.jpg')} style={styles.backgroundImage} >
-                    <TextInput placeholder={'username'} autoCorrect={false} autoCapitalize={'none'} style={[styles.credential, { bottom: Dimensions.get('window').height * 0.5 }]} />
-                    <TextInput placeholder={'password'} autoCorrect={false} autoCapitalize={'none'} style={[styles.credential, { bottom: Dimensions.get('window').height * 0.4 }]} />
-                    <Button onPress={this.goToHome} textStyle={styles.buttonText} style={[styles.button, { bottom: Dimensions.get('window').height * 0.3 }]}>
+                    <TextInput placeholder={'email'} onChangeText={(text) => this.setState({ email: text })} autoCorrect={false} autoCapitalize={'none'} style={[styles.credential, { bottom: Dimensions.get('window').height * 0.5 }]} />
+                    <TextInput placeholder={'password'} secureTextEntry={true} onChangeText={(text) => this.setState({ password: text, })} autoCorrect={false} autoCapitalize={'none'} style={[styles.credential, { bottom: Dimensions.get('window').height * 0.4 }]} />
+                    <Button onPress={() => this.loginUser()} textStyle={styles.buttonText} style={[styles.button, { bottom: Dimensions.get('window').height * 0.3 }]}>
                         Login
                     </Button>
-                    <Button onPress={this.registerUser} textStyle={styles.buttonText} style={[styles.button, { bottom: Dimensions.get('window').height * 0.2 }]}>
+                    <Button onPress={() => this.registerUser()} textStyle={styles.buttonText} style={[styles.button, { bottom: Dimensions.get('window').height * 0.2 }]}>
                         Register
                     </Button>
                 </Image>
@@ -57,14 +66,76 @@ class Login extends React.Component {
     }
 
     loginUser() {
-        this.goToHome();
+        var body = JSON.stringify({
+            email: this.state.email,
+            password: this.state.password,
+        });
+        fetch('http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/api/v1/auth/sign_in',
+            {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: body
+            })
+            .then((response) => {
+                this.setState({ responseHeaders: response.headers.map, status: response.status })
+                return (response.json())
+            })
+            .then((responseJSON) => {
+                console.log(this.state.responseHeaders);
+                console.log(responseJSON)
+                if (this.state.status == 200) {
+                    this.goToHome(this.state.responseHeaders['uid'], this.state.responseHeaders['client'], this.state.responseHeaders['access-token'], responseJSON.data.id);
+                } else {
+                    Alert.alert('Login Error',
+                        responseJSON.errors[0],
+                        [{ text: "OK", }])
+                }
+            });
     }
 
     registerUser() {
-        this.goToHome();
+        var body = JSON.stringify({
+            email: this.state.email,
+            password: this.state.password,
+            password_confirmation: this.state.password
+        });
+        fetch('http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/api/v1/auth/',
+            {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: body
+            })
+            .then((response) => {
+                this.setState({ responseHeaders: response.headers.map, status: response.status })
+                return (response.json())
+            })
+            .then((responseJSON) => {
+                console.log(this.state.responseHeaders);
+                console.log(responseJSON)
+                if (this.state.status == 200) {
+                    this.goToHome(this.state.responseHeaders['uid'], this.state.responseHeaders['client'], this.state.responseHeaders['access-token'], responseJSON.data.id);
+                } else {
+                    Alert.alert('Registration Error',
+                        responseJSON.errors.full_messages[0],
+                        [{ text: "OK", }])
+                }
+            });
     }
 
-    goToHome() {
+    goToHome(uid, client, access_token, user_id) {
+        var props = {
+            uid: uid,
+            client: client,
+            access_token: access_token,
+            user_id: user_id
+        }
+
         Navigation.startTabBasedApp({
             tabs,
             animationType: Platform.OS === 'ios' ? 'slide-down' : 'fade',
@@ -92,9 +163,11 @@ class Login extends React.Component {
             },
             drawer: {
                 left: {
-                    screen: 'storytime_buddies_frontend.Nav'
+                    screen: 'storytime_buddies_frontend.Nav',
+                    passProps: props
                 }
-            }
+            },
+            passProps: props
         });
     }
 }

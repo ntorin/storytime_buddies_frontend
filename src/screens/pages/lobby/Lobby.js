@@ -4,14 +4,19 @@ import Chatlog from '../../../components/Chatlog';
 
 class Lobby extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
+        console.log(props.lobby);
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <View style={styles.container}>
-                <Chatlog/>
+                <View style={styles.storyContainer}>
+                </View>
+                <View style={styles.chatlogContainer}>
+                    <Chatlog />
+                </View>
             </View>
         )
     }
@@ -26,6 +31,14 @@ const styles = StyleSheet.create({
     backgroundImage: {
         flex: 1,
         resizeMode: 'cover'
+    },
+
+    storyContainer: {
+        flex: 2,
+    },
+
+    chatlogContainer: {
+        flex: 1,
     },
 });
 

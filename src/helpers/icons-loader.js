@@ -6,6 +6,7 @@
 import Entypo from 'react-native-vector-icons/Entypo';
 import Foundation from 'react-native-vector-icons/Foundation';
 import Octicons from 'react-native-vector-icons/Octicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 // define your suffixes by yourself..
@@ -15,7 +16,8 @@ const icons = {
   "pencil": [30, "#fff", Entypo],
   "book-bookmark": [30, "#fff", Foundation],
   "person": [30, "#fff", Octicons],
-  "chat": [30, "#fff", Entypo]
+  "chat": [30, "#fff", Entypo],
+  "lock": [30, "#000", FontAwesome]
 }
 
 const defaultIconProvider = Entypo;
