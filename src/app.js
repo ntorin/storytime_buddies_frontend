@@ -11,6 +11,10 @@ import registerScreens from './screens';
     Navigation.startSingleScreenApp({
       screen: {
         screen: 'storytime_buddies_frontend.Login',
+        navigatorStyle: {
+            navBarTransparent: true,
+            drawUnderNavBar: true,
+        }
       },
       animationType: Platform.OS === 'ios' ? 'slide-down' : 'fade'
     });

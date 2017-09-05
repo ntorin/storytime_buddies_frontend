@@ -11,7 +11,7 @@ class MyProfile extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{width: Dimensions.get('window').width * 0.5,}}>
+                <View>
                     <Text style={styles.username}> Username</Text>
                 </View>
                 <View style={styles.userStats}>
@@ -31,11 +31,11 @@ class MyProfile extends React.Component {
                     </View>
                 </View>
 
-                <Button onPress={() => this.viewStories()} textStyle={styles.buttonText} style={[styles.button, {bottom: Dimensions.get('window').height * 0.65}]}>
+                <Button onPress={() => this.viewStories()} textStyle={styles.buttonText} style={[styles.button,]}>
                     View Stories
                 </Button>
 
-                <Button onPress={() => this.viewComments()} textStyle={styles.buttonText} style={[styles.button, {bottom: Dimensions.get('window').height * 0.55}]}>
+                <Button onPress={() => this.viewComments()} textStyle={styles.buttonText} style={[styles.button,]}>
                     View Comments
                 </Button>
 
@@ -44,28 +44,28 @@ class MyProfile extends React.Component {
                     <Text>Friends</Text>
                 </View>
 
-                <Button onPress={() => this.viewFriends()} textStyle={styles.buttonText} style={[styles.button, {bottom: Dimensions.get('window').height * 0.35}]}>
+                <Button onPress={() => this.viewFriends()} textStyle={styles.buttonText} style={[styles.button,]}>
                     View Friends
                 </Button>
             </View>
         )
     }
 
-    viewStories(){
+    viewStories() {
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.MyStories',
             title: 'Your Stories'
         });
     }
 
-    viewComments(){
+    viewComments() {
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.MyComments',
             title: 'Your Comments'
         });
     }
 
-    viewFriends(){
+    viewFriends() {
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.MyFriends',
             title: 'Friend List'
@@ -76,8 +76,6 @@ class MyProfile extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        left: Dimensions.get('window').width * 0.05,
-        right: Dimensions.get('window').width * 0.05,
     },
 
     backgroundImage: {
@@ -86,12 +84,8 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        position: 'absolute',
-        width: Dimensions.get('window').width * 0.4,
-        bottom: Dimensions.get('window').height * 0.57,
-        backgroundColor: '#41ddb8',
-        right: Dimensions.get('window').width * 0.1,
-        borderWidth: 0
+        borderColor: '#ffffff',
+        borderWidth: 1
     },
 
     buttonText: {

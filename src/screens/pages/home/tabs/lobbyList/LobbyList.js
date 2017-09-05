@@ -73,7 +73,7 @@ class LobbyList extends React.Component {
                             Join Lobby
                 </Button>
                         <View style={styles.lobbyPreview}>
-                            <Text>{this.state.lobbySelectedPreview}</Text>
+                            <Text style={styles.white}>{this.state.lobbySelectedPreview}</Text>
                         </View>
                     </View>
 
@@ -101,14 +101,14 @@ class LobbyList extends React.Component {
                 <View style={styles.rowContainer}>
                     <View style={styles.rowTopRow}>
                         <View style={styles.rowTopRowNameMembers}>
-                            <Text style={styles.lobbyName}>{rowData.name}</Text>
-                            <Text style={styles.lobbyMembers}>{rowData.members}</Text>
+                            <Text style={[styles.white, styles.lobbyName]}>{rowData.name}</Text>
+                            <Text style={[styles.white, styles.lobbyMembers]}>{rowData.members}</Text>
                         </View>
                         {this.renderLockIcon(rowData.has_password)}
                     </View>
                     <View style={styles.rowBottomRow}>
-                        <Text style={styles.lobbyWordLimit}>{rowData.word_limit}</Text>
-                        <Text style={styles.lobbyId}>{rowData.id}</Text>
+                        <Text style={[styles.white, styles.lobbyWordLimit]}>word limit: {rowData.word_limit}</Text>
+                        <Text style={[styles.white, styles.lobbyId]}>{rowData.id}</Text>
                     </View>
                 </View>
             </Button>
@@ -143,10 +143,11 @@ class LobbyList extends React.Component {
 
     joinLobby() {
         //moves the client into the desired lobby
+        console.log(this.state.lobbySelected)
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.Lobby',
-            title: 'LOBBYNAME',
-            passProps: { lobby: this.state.lobbySelected }
+            title: this.state.lobbySelected.name,
+            passProps: { lobby: this.state.lobbySelected, user_id: this.props.user_id }
         });
     }
 
@@ -156,7 +157,6 @@ class LobbyList extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        top: 20,
         padding: 5
     },
 
@@ -198,13 +198,12 @@ const styles = StyleSheet.create({
     },
 
     searchBar: {
-        flex: 1,
         textAlign: 'center'
     },
 
     button: {
-        backgroundColor: '#41ddb8',
-        borderWidth: 0
+        borderColor: '#ffffff',
+        borderWidth: 1
     },
 
     createLobby: {
@@ -253,6 +252,10 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 10,
         textAlign: 'right'
+    },
+
+    white: {
+        color: '#ffffff',
     }
 });
 

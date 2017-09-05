@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, View, Text, Dimensions, Image, TextInput, Platform, Alert } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View, Text, Dimensions, Image, TextInput, Platform, Alert, findNodeHandle, InteractionManager, } from 'react-native';
 import { iconsMap, iconsLoaded } from '../../../helpers/icons-loader';
 import { Navigation } from 'react-native-navigation';
-
+import { BlurView } from 'react-native-blur';
 import Button from 'apsl-react-native-button'
 
 var tabs;
@@ -36,8 +36,9 @@ iconsLoaded.then(() => {
 
 });
 
+var img = require('../../../assets/img/2.jpg');
 
-class Login extends React.Component {
+class Login extends Component {
 
     constructor(props) {
         super(props);
@@ -45,22 +46,40 @@ class Login extends React.Component {
             email: '',
             password: '',
             responseHeaders: '',
+            viewRef: null
         };
+    }
+
+    imageLoaded() {
+        this.setState({ viewRef: findNodeHandle(this.backgroundImage) });
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Image source={require('../../../assets/img/loginbg.jpg')} style={styles.backgroundImage} >
-                    <TextInput placeholder={'email'} onChangeText={(text) => this.setState({ email: text })} autoCorrect={false} autoCapitalize={'none'} style={[styles.credential, { bottom: Dimensions.get('window').height * 0.5 }]} />
-                    <TextInput placeholder={'password'} secureTextEntry={true} onChangeText={(text) => this.setState({ password: text, })} autoCorrect={false} autoCapitalize={'none'} style={[styles.credential, { bottom: Dimensions.get('window').height * 0.4 }]} />
-                    <Button onPress={() => this.loginUser()} textStyle={styles.buttonText} style={[styles.button, { bottom: Dimensions.get('window').height * 0.3 }]}>
+                <Image
+                    ref={(img) => { this.backgroundImage = img; }}
+                    source={img}
+                    style={[styles.backgroundImage, styles.absolute]}
+                    onLoadEnd={this.imageLoaded.bind(this)}
+                />
+                {this.state.viewRef && <BlurView
+                    style={styles.absolute}
+                    viewRef={this.state.viewRef}
+                    blurType="dark"
+                    blurAmount={100}
+                />}
+                <View>
+                    <Text>Testaaaaaaaaaa@@@@@@@@@@aaaaaaaa</Text>
+                    <TextInput placeholder={'email'} placeholderTextColor='#ffffff' underlineColorAndroid='#ffffff' selectionColor='#e14f22' textAlign='center' onChangeText={(text) => this.setState({ email: text })} autoCorrect={false} autoCapitalize={'none'} returnKeyType={'next'} style={styles.credential} />
+                    <TextInput placeholder={'password'} placeholderTextColor='#ffffff' underlineColorAndroid='#ffffff' selectionColor='#e14f22' textAlign='center' secureTextEntry={true} onChangeText={(text) => this.setState({ password: text, })} autoCorrect={false} autoCapitalize={'none'} style={styles.credential} />
+                    <Button onPress={() => this.loginUser()} textStyle={styles.buttonText} style={styles.button}>
                         Login
                     </Button>
-                    <Button onPress={() => this.registerUser()} textStyle={styles.buttonText} style={[styles.button, { bottom: Dimensions.get('window').height * 0.2 }]}>
+                    <Button onPress={() => this.registerUser()} textStyle={styles.buttonText} style={styles.button}>
                         Register
                     </Button>
-                </Image>
+                </View>
             </View>
         )
     }
@@ -70,6 +89,7 @@ class Login extends React.Component {
             email: this.state.email,
             password: this.state.password,
         });
+        console.log(body);
         fetch('http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/api/v1/auth/sign_in',
             {
                 method: "POST",
@@ -90,7 +110,7 @@ class Login extends React.Component {
                     this.goToHome(this.state.responseHeaders['uid'], this.state.responseHeaders['client'], this.state.responseHeaders['access-token'], responseJSON.data.id);
                 } else {
                     Alert.alert('Login Error',
-                        responseJSON.errors[0],
+                        'a' + responseJSON.errors[0],
                         [{ text: "OK", }])
                 }
             });
@@ -102,6 +122,7 @@ class Login extends React.Component {
             password: this.state.password,
             password_confirmation: this.state.password
         });
+        console.log(body);
         fetch('http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/api/v1/auth/',
             {
                 method: "POST",
@@ -140,26 +161,27 @@ class Login extends React.Component {
             tabs,
             animationType: Platform.OS === 'ios' ? 'slide-down' : 'fade',
             tabsStyle: {
-                tabBarBackgroundColor: '#3bc9a7',
+                tabBarBackgroundColor: '#363636',
                 navBarButtonColor: '#ffffff',
                 tabBarButtonColor: '#ffffff',
                 navBarTextColor: '#ffffff',
-                tabBarSelectedButtonColor: '#ff505c',
-                navigationBarColor: '#3bc9a7',
-                navBarBackgroundColor: '#3bc9a7',
-                statusBarColor: '#34b092',
+                tabBarSelectedButtonColor: '#e14f22',
+                navigationBarColor: '#363636',
+                navBarBackgroundColor: '#e14f22',
+                statusBarColor: '#000000',
                 tabFontFamily: 'BioRhyme-Bold',
             },
             appStyle: {
-                tabBarBackgroundColor: '#3bc9a7',
+                tabBarBackgroundColor: '#363636',
                 navBarButtonColor: '#ffffff',
                 tabBarButtonColor: '#ffffff',
                 navBarTextColor: '#ffffff',
-                tabBarSelectedButtonColor: '#fbf5a9',
+                tabBarSelectedButtonColor: '#e14f22',
                 navigationBarColor: '#000000',
-                navBarBackgroundColor: '#3bc9a7',
-                statusBarColor: '#34b092',
+                navBarBackgroundColor: '#363636',
+                statusBarColor: '#000000',
                 tabFontFamily: 'BioRhyme-Bold',
+                screenBackgroundColor: '#4e4e4e'
             },
             drawer: {
                 left: {
@@ -177,32 +199,33 @@ class Login extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     backgroundImage: {
+        backgroundColor: 'transparent',
         flex: 1,
-        resizeMode: 'cover'
+        resizeMode: 'cover',
+        left: 500
     },
 
     credential: {
-        position: 'absolute',
-        width: Dimensions.get('window').width * 0.7,
-        left: Dimensions.get('window').width * 0.15,
-        bottom: Dimensions.get('window').height * 0.5
+        color: "#ffffff", //Expecting this to change input text color
     },
 
     button: {
-        position: 'absolute',
-        width: Dimensions.get('window').width * 0.7,
-        left: Dimensions.get('window').width * 0.15,
-        right: Dimensions.get('window').width * 0.15,
-        backgroundColor: '#41ddb8',
-        borderWidth: 0
+        borderColor: '#ffffff',
+        borderWidth: 1
     },
 
     buttonText: {
         color: '#ffffff'
-    }
+    },
+    absolute: {
+        position: "absolute",
+        top: 0, left: 0, bottom: 0, right: 0,
+    },
 });
 
 export default Login;
