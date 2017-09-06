@@ -46,7 +46,8 @@ class Login extends Component {
             email: '',
             password: '',
             responseHeaders: '',
-            viewRef: null
+            viewRef: null,
+            user: {},
         };
     }
 
@@ -107,7 +108,8 @@ class Login extends Component {
                 console.log(this.state.responseHeaders);
                 console.log(responseJSON)
                 if (this.state.status == 200) {
-                    this.goToHome(this.state.responseHeaders['uid'], this.state.responseHeaders['client'], this.state.responseHeaders['access-token'], responseJSON.data.id);
+                this.setState({user: responseJSON.data})
+                    this.goToHome(this.state.responseHeaders['uid'], this.state.responseHeaders['client'], this.state.responseHeaders['access-token']);
                 } else {
                     Alert.alert('Login Error',
                         'a' + responseJSON.errors[0],
@@ -140,7 +142,8 @@ class Login extends Component {
                 console.log(this.state.responseHeaders);
                 console.log(responseJSON)
                 if (this.state.status == 200) {
-                    this.goToHome(this.state.responseHeaders['uid'], this.state.responseHeaders['client'], this.state.responseHeaders['access-token'], responseJSON.data.id);
+                this.setState({user: responseJSON.data})
+                    this.goToHome(this.state.responseHeaders['uid'], this.state.responseHeaders['client'], this.state.responseHeaders['access-token']);
                 } else {
                     Alert.alert('Registration Error',
                         responseJSON.errors.full_messages[0],
@@ -149,12 +152,16 @@ class Login extends Component {
             });
     }
 
-    goToHome(uid, client, access_token, user_id) {
-        var props = {
+    goToHome(uid, client, access_token) {
+        var auth = {
             uid: uid,
             client: client,
-            access_token: access_token,
-            user_id: user_id
+            access_token: access_token
+        }
+        
+        var props = {
+            auth: auth,
+            user: this.state.user
         }
 
         Navigation.startTabBasedApp({

@@ -85,8 +85,10 @@ class Lobby extends React.Component {
                         </ScrollView>
                     </View>
                     <View style={styles.storyInput}>
-                        <TextInput ref={component => this._storyInput = component} placeholder={'type your piece here'} onChangeText={(text) => this.setState({ storyInput: text })} autoCapitalize={'none'} style={{ flex: 8 }} />
-                        <Button onPress={() => this.onSendStoryInput()} style={{ flex: 2 }}>
+                        <TextInput ref={component => this._storyInput = component} 
+                            placeholderTextColor='#ffffff' underlineColorAndroid='#ffffff' selectionColor='#e14f22' 
+                            placeholder={'type your piece here'} onChangeText={(text) => this.setState({ storyInput: text })} autoCapitalize={'none'} style={{ flex: 8 }} />
+                        <Button style={styles.sendButton} textStyle={styles.buttonText} onPress={() => this.onSendStoryInput()}>
                             Send
                         </Button>
                     </View>
@@ -99,8 +101,10 @@ class Lobby extends React.Component {
                                 renderRow={this.renderChatlog.bind(this)} />
                         </View>
                         <View style={styles.chatlogInput}>
-                            <TextInput ref={component => this._chatInput = component} placeholder={'send a message'} onChangeText={(text) => this.setState({ chatInput: text })} autoCapitalize={'none'} style={{ flex: 8 }} />
-                            <Button onPress={() => this.onSendChatInput()} style={{ flex: 2 }}>
+                            <TextInput ref={component => this._chatInput = component} 
+                                placeholderTextColor='#ffffff' underlineColorAndroid='#ffffff' selectionColor='#e14f22' 
+                                placeholder={'send a message'} onChangeText={(text) => this.setState({ chatInput: text })} autoCapitalize={'none'} style={{ flex: 8 }} />
+                            <Button style={styles.sendButton} textStyle={styles.buttonText} onPress={() => this.onSendChatInput()}>
                                 Send
                         </Button>
                         </View>
@@ -141,7 +145,7 @@ class Lobby extends React.Component {
         var body = JSON.stringify({
             message: input,
             lobby_id: this.props.lobby.id,
-            user_id: this.props.user_id,
+            user_id: this.props.user.id,
         });
 
         fetch('http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/lobby_messages.json',
@@ -189,7 +193,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 5,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#4e4e4e'
     },
 
     backgroundImage: {
@@ -228,7 +232,17 @@ const styles = StyleSheet.create({
 
     storyTitle: {
         fontSize: 24
-    }
+    },
+
+    sendButton: {
+        flex: 2,
+        borderColor: '#e14f22',
+        borderWidth: 1
+    },
+
+    buttonText: {
+        color: '#e14f22'
+    },
 });
 
 export default Lobby;

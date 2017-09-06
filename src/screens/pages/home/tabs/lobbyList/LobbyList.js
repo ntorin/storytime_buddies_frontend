@@ -8,7 +8,7 @@ var lobbyList = [
         "name": "Split Been",
         "has_password": false,
         "password": "",
-        "word_limit": null,
+        "word_limit": 5,
         "master_user_id": 0,
         "members": 0,
         "created_at": "2017-08-08T09:15:24.377Z",
@@ -31,7 +31,7 @@ class LobbyList extends React.Component {
             lobbySelectedPreview: 'Select a lobby to view its story here.'
         };
 
-        this.fetchLobbies()
+        //this.fetchLobbies()
     }
 
     _onRefresh() {
@@ -61,8 +61,8 @@ class LobbyList extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <TextInput placeholder={'🔎 Search...'} autoCorrect={false} autoCapitalize={'none'}
-                    keyboardType={'web-search'} onSubmitEditing={() => this.filterQuery()} style={styles.searchBar} />
+                <TextInput placeholderTextColor='#ffffff' underlineColorAndroid='#ffffff' selectionColor='#e14f22' placeholder={'🔎 Search...'} autoCorrect={false} autoCapitalize={'none'}
+                    keyboardType={'web-search'} onSubmitEditing={() => this.filterQuery()} style={[styles.searchBar]} />
                 <View style={styles.subContainer}>
                     <View style={styles.leftCol}>
                         <Button onPress={() => this.createLobby()} textStyle={styles.buttonText} style={[styles.button, styles.createLobby]}>
@@ -100,15 +100,12 @@ class LobbyList extends React.Component {
             <Button onPress={() => this.onLobbySelected(rowData)} style={styles.listItem}>
                 <View style={styles.rowContainer}>
                     <View style={styles.rowTopRow}>
-                        <View style={styles.rowTopRowNameMembers}>
-                            <Text style={[styles.white, styles.lobbyName]}>{rowData.name}</Text>
-                            <Text style={[styles.white, styles.lobbyMembers]}>{rowData.members}</Text>
+                        <Text style={[styles.white, styles.lobbyName]}>{rowData.name}</Text>
+                        <View style={styles.rowBottomRow}>
+                            <Text style={[styles.white, styles.lobbyMembers]}>{rowData.members} members</Text>
+                            <Text style={[styles.white, styles.lobbyWordLimit]}>{rowData.word_limit} words</Text>
+                            <Text style={[styles.white, styles.lobbyId]}>{rowData.id}</Text>
                         </View>
-                        {this.renderLockIcon(rowData.has_password)}
-                    </View>
-                    <View style={styles.rowBottomRow}>
-                        <Text style={[styles.white, styles.lobbyWordLimit]}>word limit: {rowData.word_limit}</Text>
-                        <Text style={[styles.white, styles.lobbyId]}>{rowData.id}</Text>
                     </View>
                 </View>
             </Button>
@@ -116,10 +113,10 @@ class LobbyList extends React.Component {
     }
 
     renderLockIcon(hasPassword) {
-        if(hasPassword){
-        return <Text style={styles.lockIcon}>Locked</Text>
-        }else{
-            return <Text style={styles.lockIcon}/>
+        if (hasPassword) {
+            return <Text style={styles.lockIcon}>Locked</Text>
+        } else {
+            return <Text style={styles.lockIcon} />
         }
     }
 
@@ -137,7 +134,7 @@ class LobbyList extends React.Component {
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.CreateLobby',
             title: 'Create a Lobby',
-            passProps: {user_id: this.props.user_id}
+            passProps: { user: this.props.user }
         });
     }
 
@@ -147,7 +144,7 @@ class LobbyList extends React.Component {
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.Lobby',
             title: this.state.lobbySelected.name,
-            passProps: { lobby: this.state.lobbySelected, user_id: this.props.user_id }
+            passProps: { lobby: this.state.lobbySelected, user: this.props.user }
         });
     }
 
@@ -170,7 +167,6 @@ const styles = StyleSheet.create({
 
     rowTopRow: {
         flex: 1,
-        flexDirection: 'row'
     },
 
     rowTopRowNameMembers: {
@@ -184,12 +180,12 @@ const styles = StyleSheet.create({
     },
 
     leftCol: {
-        flex: 1,
+        flex: 4,
         padding: 5
     },
 
     rightCol: {
-        flex: 1,
+        flex: 6,
     },
 
     backgroundImage: {
@@ -202,7 +198,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        borderColor: '#ffffff',
+        borderColor: '#e14f22',
         borderWidth: 1
     },
 
@@ -213,7 +209,7 @@ const styles = StyleSheet.create({
     },
 
     buttonText: {
-        color: '#ffffff'
+        color: '#e14f22'
     },
 
     lobbyPreview: {
@@ -224,24 +220,25 @@ const styles = StyleSheet.create({
     },
 
     lobbyName: {
-        flex: 1,
-        fontSize: 12,
+        fontWeight: 'bold',
     },
 
     lobbyMembers: {
-        flex: 1,
-        fontSize: 12,
-    },
-
-    lobbyId: {
-        flex: 1,
-        fontSize: 12,
-        textAlign: 'right'
+        flex: 9,
+        textAlign: 'left',
     },
 
     lobbyWordLimit: {
-
+        flex: 9,
+        textAlign: 'center',
     },
+
+    lobbyId: {
+        flex: 2,
+        textAlign: 'right'
+    },
+
+    
 
     listItem: {
         borderWidth: 0,

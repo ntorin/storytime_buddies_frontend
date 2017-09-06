@@ -80,8 +80,8 @@ class Library extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <TextInput placeholder={'🔎 Search...'} autoCorrect={false} autoCapitalize={'none'}
-                    keyboardType={'web-search'} onSubmitEditing={this.filterQuery} style={styles.searchBar} />
+                <TextInput placeholderTextColor='#ffffff' underlineColorAndroid='#ffffff' selectionColor='#e14f22' placeholder={'🔎 Search...'} autoCorrect={false} autoCapitalize={'none'}
+                    keyboardType={'web-search'} onSubmitEditing={this.filterQuery} style={[styles.searchBar]} />
 
                 <SegmentedControlTab
                     values={['Popular', 'Recent']}
@@ -112,6 +112,7 @@ class Library extends React.Component {
 
     renderRow(rowData) {
         return (
+            <View>
             <Button onPress={() => this.goToStory(rowData)} style={styles.listItem}>
                 <View style={styles.rowContainer}>
                     <View style={styles.rowTopRow}>
@@ -127,6 +128,7 @@ class Library extends React.Component {
                     </View>
                 </View>
             </Button>
+            </View>
         )
     }
 
@@ -134,7 +136,7 @@ class Library extends React.Component {
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.Story',
             title: rowData.name,
-            passProps: { story: rowData }
+            passProps: { story: rowData, user: this.props.user }
         });
     }
 }

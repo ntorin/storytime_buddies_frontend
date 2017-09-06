@@ -11,42 +11,28 @@ class MyProfile extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View>
-                    <Text style={styles.username}> Username</Text>
+                <View style={styles.profileContainer}>
+                    <View style={styles.userStats}>
+                        <View>
+                            <Text style={[styles.white, styles.username]}>{this.props.user.nickname}</Text>
+                        </View>
+                        <View>
+                            <Text style={[styles.white, styles.storiesStarted]}>Stories started</Text>
+                            <Text style={[styles.white, styles.storiesJoined]}>Stories joined</Text>
+                            <Text style={[styles.white, styles.libraryComments]}>Library comments</Text>
+                            <Text style={[styles.white, styles.totalViews]}>Total views</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.buttonContainer}>
+                        <Button onPress={() => this.viewStories()} textStyle={styles.buttonText} style={[styles.button,]}>
+                            View Stories
+                    </Button>
+                        <Button onPress={() => this.viewComments()} textStyle={styles.buttonText} style={[styles.button,]}>
+                            View Comments
+                    </Button>
+                    </View>
                 </View>
-                <View style={styles.userStats}>
-                    <View style={styles.storiesStarted}>
-                        <Text>Stories started</Text>
-                    </View>
-                    <View style={styles.storiesJoined}>
-                        <Text>Stories joined</Text>
-                    </View>
-
-                    <View style={styles.libraryComments}>
-                        <Text>Library comments</Text>
-                    </View>
-
-                    <View style={styles.totalViews}>
-                        <Text>Total views</Text>
-                    </View>
-                </View>
-
-                <Button onPress={() => this.viewStories()} textStyle={styles.buttonText} style={[styles.button,]}>
-                    View Stories
-                </Button>
-
-                <Button onPress={() => this.viewComments()} textStyle={styles.buttonText} style={[styles.button,]}>
-                    View Comments
-                </Button>
-
-                <View style={styles.friends}>
-                    <Image />
-                    <Text>Friends</Text>
-                </View>
-
-                <Button onPress={() => this.viewFriends()} textStyle={styles.buttonText} style={[styles.button,]}>
-                    View Friends
-                </Button>
             </View>
         )
     }
@@ -76,6 +62,11 @@ class MyProfile extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        padding: 5
+    },
+
+    profileContainer: {
+        flexDirection: 'row'
     },
 
     backgroundImage: {
@@ -84,12 +75,12 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        borderColor: '#ffffff',
+        borderColor: '#e14f22',
         borderWidth: 1
     },
 
     buttonText: {
-        color: '#ffffff'
+        color: '#e14f22'
     },
 
     username: {
@@ -98,6 +89,11 @@ const styles = StyleSheet.create({
     },
 
     userStats: {
+        flex: 1
+    },
+
+    buttonContainer: {
+        flex: 1
     },
 
     storiesStarted: {
@@ -113,7 +109,11 @@ const styles = StyleSheet.create({
     },
 
     friends: {
-    }
+    },
+
+    white: {
+        color: '#ffffff',
+    },
 });
 
 export default MyProfile;

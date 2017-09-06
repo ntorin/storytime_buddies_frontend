@@ -18,9 +18,12 @@ class CreateLobby extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <TextInput placeholder={'Lobby Name'} onChangeText={(text) => this.setState({ name: text })} autoCorrect={false} autoCapitalize={'words'} />
-                <TextInput placeholder={'Word Limit (default: 5)'} onChangeText={(text) => this.setState({ word_limit: text })} autoCorrect={false} keyboardType={'numeric'} autoCapitalize={'words'} />
-                <TextInput placeholder={'Password (optional)'} onChangeText={(text) => this.setState({ password: text })} autoCorrect={false} autoCapitalize={'words'} />
+                <TextInput placeholderTextColor='#ffffff' underlineColorAndroid='#ffffff' selectionColor='#e14f22' 
+                placeholder={'Lobby Name'} onChangeText={(text) => this.setState({ name: text })} autoCorrect={false} autoCapitalize={'words'} />
+                <TextInput placeholderTextColor='#ffffff' underlineColorAndroid='#ffffff' selectionColor='#e14f22' 
+                placeholder={'Word Limit (default: 5)'} onChangeText={(text) => this.setState({ word_limit: text })} autoCorrect={false} keyboardType={'numeric'} autoCapitalize={'words'} />
+                <TextInput placeholderTextColor='#ffffff' underlineColorAndroid='#ffffff' selectionColor='#e14f22' 
+                placeholder={'Password (optional)'} onChangeText={(text) => this.setState({ password: text })} autoCorrect={false} autoCapitalize={'words'} />
 
                 <Button onPress={() => this.onSubmit()} textStyle={styles.buttonText} style={styles.button} >
                     Create Lobby
@@ -58,7 +61,7 @@ class CreateLobby extends React.Component {
             has_password: has_password,
             password: this.state.password,
             word_limit: parseInt(this.state.word_limit),
-            master_user_id: this.props.user_id,
+            master_user_id: this.props.user.id,
             members: 0
         });
         
@@ -96,7 +99,7 @@ class CreateLobby extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#4e4e4e'
     },
 
     backgroundImage: {
@@ -105,12 +108,12 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: '#41ddb8',
-        borderWidth: 0
+        borderColor: '#e14f22',
+        borderWidth: 1
     },
 
     buttonText: {
-        color: '#ffffff'
+        color: '#e14f22'
     },
 });
 

@@ -18,6 +18,15 @@ var storyList = [
     },
 ]
 
+var comment = {
+    "id": 1,
+    "username": null,
+    "comment": "Labore hic nihil expedita.",
+    "likes": 430,
+    "story_id": 1,
+    "user_id": 2
+}
+
 const cable = ActionCable.createConsumer('ws://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/cable');
 
 class Story extends React.Component {
@@ -73,7 +82,7 @@ class Story extends React.Component {
                     </ScrollView>
                     <View style={styles.storyContainerViewsLikesCompleted}>
                         <Text style={[styles.white, styles.views]}>{this.state.story.views} views</Text>
-                        <Text style={[styles.white, styles.likes]}>{this.state.story.likes} likes</Text>
+                        <Text style={[styles.white, styles.storyLikesText]}>{this.state.story.likes} likes</Text>
                         <Text style={[styles.white, styles.completed]}>{this.state.story.completed}</Text>
                     </View>
                 </View>
@@ -91,12 +100,14 @@ class Story extends React.Component {
                             renderRow={this.renderRow.bind(this)}
                         />
                     </View>
-                        <View style={styles.commentInput}>
-                            <TextInput ref={component => this._chatInput = component} placeholder={'write a comment'} onChangeText={(text) => this.setState({ commentInput: text })} autoCapitalize={'none'} style={{ flex: 8 }} />
-                            <Button onPress={() => this.onSendChatInput()} style={{ flex: 2 }}>
-                                Send
+                    <View style={styles.commentInput}>
+                        <TextInput ref={component => this._chatInput = component}
+                            placeholderTextColor='#ffffff' underlineColorAndroid='#ffffff' selectionColor='#e14f22'
+                            placeholder={'write a comment...'} onChangeText={(text) => this.setState({ commentInput: text })} autoCapitalize={'none'} style={{ flex: 8 }} />
+                        <Button onPress={() => this.onSendCommentInput()} textStyle={styles.buttonText} style={styles.sendButton}>
+                            Send
                         </Button>
-                        </View>
+                    </View>
                 </View>
             </View>
         )
@@ -105,39 +116,54 @@ class Story extends React.Component {
     renderRow(rowData) {
         return (
             <View style={styles.commentMessage}>
-                <Text>{rowData.username}</Text>
-                <Text>{rowData.message}</Text>
+                <Text style={[styles.white, styles.username]}>username {rowData.username}</Text>
+                <Text style={styles.white}>{rowData.comment}</Text>
+                <View>
+                    <Text style={styles.white}>{rowData.likes} likes</Text>
+                </View>
             </View>
         )
     }
 
+
+    onLikeStory() {
+
+    }
+
+    onLikeStoryComment() {
+
+    }
+
     onSendCommentInput() {
-        var input = this.state.commentInput;
-        var body = JSON.stringify({
-            comment: input,
-            story_id: this.state.story.id,
-            user_id: this.props.user.id,
-            username: this.props.user.username
-        });
+        if (this.state.comment.trim() != '') {
+            var input = this.state.commentInput;
+            var body = JSON.stringify({
+                comment: input,
+                story_id: this.state.story.id,
+                user_id: this.props.user.id,
+                username: this.props.user.nickname,
+                likes: 0
+            });
 
-        fetch('http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/library_comments.json',
-            {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: body
-            })
-            .then((response) => {
-                return (response.json())
-            })
-            .then((responseJSON) => {
-                console.log(responseJSON)
-            })
+            fetch('http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/library_comments.json',
+                {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: body
+                })
+                .then((response) => {
+                    return (response.json())
+                })
+                .then((responseJSON) => {
+                    console.log(responseJSON)
+                })
 
-        this.setState({ commentInput: '' });
-        this._chatInput.setNativeProps({ text: '' });
+            this.setState({ commentInput: '' });
+            this._chatInput.setNativeProps({ text: '' });
+        }
     }
 }
 
@@ -166,7 +192,17 @@ const styles = StyleSheet.create({
 
     },
 
-    likes: {
+    storyLikes: {
+        flex: 1,
+        borderWidth: 0,
+    },
+
+    commentLikes: {
+        flex: 1,
+        borderWidth: 0,
+    },
+
+    storyLikesText: {
         flex: 1,
         textAlign: 'center'
     },
@@ -181,11 +217,11 @@ const styles = StyleSheet.create({
     },
 
     storyContainer: {
-        flex: 6
+        flex: 5
     },
 
     commentsContainer: {
-        flex: 4
+        flex: 5
     },
 
     commentInput: {
@@ -202,7 +238,7 @@ const styles = StyleSheet.create({
     },
 
     commentMessage: {
-
+        flex: 1
     },
 
     message: {
@@ -210,12 +246,21 @@ const styles = StyleSheet.create({
     },
 
     username: {
-
+        fontWeight: 'bold',
     },
 
     white: {
         color: '#ffffff',
-    }
+    },
+
+    sendButton: {
+        borderColor: '#e14f22',
+        borderWidth: 1
+    },
+
+    buttonText: {
+        color: '#e14f22'
+    },
 });
 
 export default Story;
