@@ -65,7 +65,7 @@ class CreateLobby extends React.Component {
             members: 0
         });
         
-        fetch('http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/lobbies.json',
+        fetch('http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/lobbies/create_room/',
             {
                 method: "POST",
                 headers: {

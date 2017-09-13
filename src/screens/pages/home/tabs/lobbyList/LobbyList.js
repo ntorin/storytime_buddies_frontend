@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions, Image, TextInput, ListView, RefreshControl } from 'react-native';
 import Button from 'apsl-react-native-button';
+import { iconsMap, iconsLoaded } from '../../../../../helpers/icons-loader';
 
 var lobbyList = [
     {
@@ -31,7 +32,7 @@ class LobbyList extends React.Component {
             lobbySelectedPreview: 'Select a lobby to view its story here.'
         };
 
-        //this.fetchLobbies()
+        this.fetchLobbies()
     }
 
     _onRefresh() {
@@ -43,6 +44,7 @@ class LobbyList extends React.Component {
         fetch('http://ec2-13-59-214-6.us-east-2.compute.amazonaws.com/lobbies.json')
             .then((response) => response.json())
             .then((responseJSON) => {
+                console.log(responseJSON);
                 this.setState({ lobbies: this.state.lobbies.cloneWithRows(responseJSON), refreshing: false });
             });
     }
@@ -122,7 +124,7 @@ class LobbyList extends React.Component {
 
     onLobbySelected(rowData) {
         this.setState({ lobbySelected: rowData });
-        this.fetchLobbyStory(rowData.id);
+        this.fetchLobbyStory(rowData.story_id);
     }
 
     filterQuery() {
@@ -134,7 +136,7 @@ class LobbyList extends React.Component {
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.CreateLobby',
             title: 'Create a Lobby',
-            passProps: { user: this.props.user }
+            passProps: { user: this.props.user },
         });
     }
 
@@ -144,9 +146,16 @@ class LobbyList extends React.Component {
         this.props.navigator.push({
             screen: 'storytime_buddies_frontend.Lobby',
             title: this.state.lobbySelected.name,
-            passProps: { lobby: this.state.lobbySelected, user: this.props.user }
+            passProps: { lobby: this.state.lobbySelected, user: this.props.user },
+            navigatorButtons: {
+                rightButtons: [{
+                    icon: iconsMap['pencil'],
+                    id: 'actions',
+                }]
+            }
         });
     }
+
 
 
 }
@@ -194,7 +203,8 @@ const styles = StyleSheet.create({
     },
 
     searchBar: {
-        textAlign: 'center'
+        textAlign: 'center',
+        color: "#ffffff",
     },
 
     button: {
@@ -238,7 +248,7 @@ const styles = StyleSheet.create({
         textAlign: 'right'
     },
 
-    
+
 
     listItem: {
         borderWidth: 0,

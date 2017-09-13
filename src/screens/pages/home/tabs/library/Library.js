@@ -152,7 +152,8 @@ const styles = StyleSheet.create({
     },
 
     searchBar: {
-        textAlign: 'center'
+        textAlign: 'center',
+        color: "#ffffff",
     },
 
     button: {

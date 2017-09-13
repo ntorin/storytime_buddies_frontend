@@ -8,6 +8,7 @@ import Library from './pages/home/tabs/library/Library';
 import MyProfile from './pages/home/tabs/myProfile/MyProfile';
 import Messages from './pages/home/tabs/messages/Messages';
 import Lobby from './pages/lobby/Lobby';
+import LobbyActions from './pages/lobby/LobbyActions'
 import CreateLobby from './pages/lobby/CreateLobby';
 import Chat from './pages/chat/Chat';
 import UserDirectory from './pages/nav/items/UserDirectory';
@@ -30,6 +31,8 @@ export default function () {
 
   Navigation.registerComponent('storytime_buddies_frontend.Lobby', () => Lobby);
   Navigation.registerComponent('storytime_buddies_frontend.CreateLobby', () => CreateLobby);
+  Navigation.registerComponent('storytime_buddies_frontend.LobbyActions', () => LobbyActions);
+
   Navigation.registerComponent('storytime_buddies_frontend.Chat', () => Chat);
 
   Navigation.registerComponent('storytime_buddies_frontend.Story', () => Story);

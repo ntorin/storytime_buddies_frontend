@@ -158,7 +158,7 @@ class Login extends Component {
             client: client,
             access_token: access_token
         }
-        
+
         var props = {
             auth: auth,
             user: this.state.user
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     },
 
     credential: {
-        color: "#ffffff", //Expecting this to change input text color
+        color: "#ffffff",
     },
 
     button: {
